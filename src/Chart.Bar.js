@@ -57,7 +57,7 @@
 					//Reusable method for calculating the xPosition of a given bar based on datasetIndex & width of the bar
 					var xWidth = this.calculateBaseWidth(),
 						xAbsolute = this.calculateX(barIndex) - (xWidth/2),
-						barWidth = this.calculateBarWidth(datasetCount);
+						barWidth = 30;
 
 					return xAbsolute + (barWidth * datasetIndex) + (datasetIndex * options.barDatasetSpacing) + barWidth/2;
 				},

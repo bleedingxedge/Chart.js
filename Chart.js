@@ -18,7 +18,7 @@
 		previous = root.Chart;
 
 	//Occupy the global variable of Chart, and create a simple base class
-	var Chart = function(context){
+	var Chart = function(context, options){
 		var chart = this;
 		this.canvas = context.canvas;
 
@@ -36,9 +36,15 @@
 				return document.defaultView.getComputedStyle(element).getPropertyValue(dimension);
 			}
 		}
-
-		var width = this.width = computeDimension(context.canvas,'Width');
-		var height = this.height = computeDimension(context.canvas,'Height');
+		var width;
+		var heightl
+		if (options){
+			width = this.width =  options.drawObject * 30  + ( 14 * ( options.drawObject - 1 ) );
+			height = 415;
+		} else {
+			width = this.width = computeDimension(context.canvas,'Width');
+			height = this.height = computeDimension(context.canvas,'Height');
+		}
 
 		// Firefox requires this to work correctly
 		context.canvas.width  = width;
@@ -3531,11 +3537,11 @@
 			//Expose options as a scope variable here so we can access it in the ScaleClass
 			var options = this.options;
 
-			var width = data.options.drawObject * 30  + ( 14 * ( data.options.drawObject - 1 ) );
-			var height = 415;
+			//var width = data.options.drawObject * 30  + ( 14 * ( data.options.drawObject - 1 ) );
+			//var height = 415;
 
-			this.chart.canvas.width = width;
-			this.chart.canvas.height = height;
+			//this.chart.canvas.width = width;
+			//this.chart.canvas.height = height;
 
 			this.ScaleClass = Chart.Scale.extend({
 				offsetGridLines : true,

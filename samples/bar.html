@@ -27,7 +27,8 @@
 	}
 	window.onload = function(){
 		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myCustom = new Chart(ctx).Custom(barChartData);
+		var options = { "drawObject": 7 }
+		window.myCustom = new Chart(ctx, options).Custom(barChartData);
 	}
 
 	</script>

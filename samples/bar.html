@@ -15,20 +15,21 @@
 	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 
 	var barChartData = {
-		labels : ["January","February","March","April","May","June","July"],
+		labels : ["January","February","March","April","May","June","July","January","February","March","April","May","June","July","January","February","March","April","May","June","July"],
 		datasets : [
 			{
-				fillColor : "rgba(220,220,220,0.5)",
-				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+				fillColor : "#ff0000",
+				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
 			}
-		],
-		options : { "drawObject": 7 }
+		]
 
 	}
 	window.onload = function(){
 		var ctx = document.getElementById("canvas").getContext("2d");
-		var options = { "drawObject": 7 }
-		window.myCustom = new Chart(ctx, options).Custom(barChartData);
+		var options = { "drawObject": 21}
+		window.myCustom = new Chart(ctx, options).Bar(barChartData, {
+			barValueSpacing : 6
+		});
 	}
 
 	</script>

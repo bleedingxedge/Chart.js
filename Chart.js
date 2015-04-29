@@ -37,9 +37,9 @@
 			}
 		}
 		var width;
-		var heightl
+		var height;
 		if (options){
-			width = this.width =  options.drawObject * 30  + ( 14 * ( options.drawObject - 1 ) );
+			width = this.width =  options.drawObject * 34  + ( 14 * ( options.drawObject - 1 ) );
 			height = 415;
 		} else {
 			width = this.width = computeDimension(context.canvas,'Width');

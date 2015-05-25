@@ -18,7 +18,7 @@
 		previous = root.Chart;
 
 	//Occupy the global variable of Chart, and create a simple base class
-	var Chart = function(context){
+	var Chart = function(context, options){
 		var chart = this;
 		this.canvas = context.canvas;
 
@@ -37,8 +37,15 @@
 			}
 		};
 
-		var width = this.width = computeDimension(context.canvas,'Width') || context.canvas.width;
-		var height = this.height = computeDimension(context.canvas,'Height') || context.canvas.height;
+		var width;
+		var height;
+		if (options){
+			width = this.width =  options.drawObject * 34  + ( 14 * ( options.drawObject - 1 ) );
+			height = 415;
+		} else {
+			width = this.width = computeDimension(context.canvas,'Width');
+			height = this.height = computeDimension(context.canvas,'Height');
+		}
 
 		// Firefox requires this to work correctly
 		context.canvas.width  = width;
@@ -86,6 +93,9 @@
 
 			// Boolean - Whether to show labels on the scale
 			scaleShowLabels: true,
+
+			// Boolean or a positive integer denoting number of labels to be shown on x axis
+			showXLabels: true,
 
 			// Interpolated JS string - can access value
 			scaleLabel: "<%=value%>",
@@ -1737,6 +1747,10 @@
 
 				},this);
 
+				// if showXLabels is a number then divide and determine how many xLabels to skip before showing next label
+				// else, if showXLabels is true, print all labels, else never print
+				this.xLabelsSkipper = isNumber(this.showXLabels) ? Math.ceil(this.xLabels.length/this.showXLabels) : (this.showXLabels === true) ? 1 : this.xLabels.length+1;
+
 				each(this.xLabels,function(label,index){
 					var xPos = this.calculateX(index) + aliasPixel(this.lineWidth),
 						// Check to see if line/bar here and decide where to place the line
@@ -1776,11 +1790,14 @@
 
 
 					// Small lines at the bottom of the base grid line
-					ctx.beginPath();
-					ctx.moveTo(linePos,this.endPoint);
-					ctx.lineTo(linePos,this.endPoint + 5);
-					ctx.stroke();
-					ctx.closePath();
+					if(index % this.xLabelsSkipper === 0) {
+						//X axis ticks only painted for number of selected x values
+						ctx.beginPath();
+						ctx.moveTo(linePos,this.endPoint);
+						ctx.lineTo(linePos,this.endPoint + 5);
+						ctx.stroke();
+						ctx.closePath();
+					}
 
 					ctx.save();
 					ctx.translate(xPos,(isRotated) ? this.endPoint + 12 : this.endPoint + 8);
@@ -1788,7 +1805,9 @@
 					ctx.font = this.font;
 					ctx.textAlign = (isRotated) ? "right" : "center";
 					ctx.textBaseline = (isRotated) ? "middle" : "top";
-					ctx.fillText(label, 0, 0);
+					if(index % this.xLabelsSkipper === 0) {
+						ctx.fillText(label, 0, 0);
+					}
 					ctx.restore();
 				},this);
 

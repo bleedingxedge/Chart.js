@@ -44,7 +44,7 @@
 			height = 415;
 		} else {
 			width = this.width = computeDimension(context.canvas,'Width');
-			height = this.height = computeDimension(context.canvas,'Height');
+			height = 415;
 		}
 
 		// Firefox requires this to work correctly

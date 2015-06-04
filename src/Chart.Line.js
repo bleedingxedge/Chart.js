@@ -74,7 +74,7 @@
 					return (Math.pow(mouseX-this.x, 2) < Math.pow(this.radius + this.hitDetectionRadius,2));
 				}
 			});
-
+			console.debug('datadebug', data);
 			this.datasets = [];
 
 			//Set up tooltip events on the chart

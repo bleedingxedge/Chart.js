@@ -44,7 +44,7 @@
 			height = 415;
 		} else {
 			width = this.width = computeDimension(context.canvas,'Width');
-			height = 415;
+			height = this.height = computeDimension(context.canvas,'Height');
 		}
 
 		// Firefox requires this to work correctly
@@ -183,6 +183,9 @@
 
 			// String - Colour behind the legend colour block
 			multiTooltipKeyBackground: '#fff',
+
+			//String - Tooltip stroke Color
+			tooltipStrokeColor: "#FF0000",
 
 			// Function - Will fire on animation progression.
 			onAnimationProgress: function(){},
@@ -1093,6 +1096,7 @@
 						titleFontStyle: this.options.tooltipTitleFontStyle,
 						titleFontSize: this.options.tooltipTitleFontSize,
 						cornerRadius: this.options.tooltipCornerRadius,
+						strokeStyle: this.options.tooltipStrokeColor,
 						labels: tooltipLabels,
 						legendColors: tooltipColors,
 						legendColorBackground : this.options.multiTooltipKeyBackground,
@@ -1117,6 +1121,7 @@
 							fontSize: this.options.tooltipFontSize,
 							caretHeight: this.options.tooltipCaretSize,
 							cornerRadius: this.options.tooltipCornerRadius,
+							strokeStyle: this.options.tooltipStrokeColor,
 							text: template(this.options.tooltipTemplate, Element),
 							chart: this.chart,
 							custom: this.options.customTooltips
@@ -1396,6 +1401,7 @@
 				tooltipY = this.y - tooltipHeight;
 
 			ctx.fillStyle = this.fillColor;
+			ctx.strokeStyle = this.strokeStyle;
 
 			// Custom Tooltips
 			if(this.custom){
@@ -1411,6 +1417,8 @@
 					ctx.lineTo(this.x + this.caretHeight, this.y - (caretPadding + this.caretHeight));
 					ctx.lineTo(this.x - this.caretHeight, this.y - (caretPadding + this.caretHeight));
 					ctx.closePath();
+					ctx.strokeStyle = this.strokeStyle;
+					ctx.stroke(); 
 					ctx.fill();
 					break;
 				case "below":
@@ -1421,6 +1429,8 @@
 					ctx.lineTo(this.x + this.caretHeight, this.y + caretPadding + this.caretHeight);
 					ctx.lineTo(this.x - this.caretHeight, this.y + caretPadding + this.caretHeight);
 					ctx.closePath();
+					ctx.strokeStyle = this.strokeStyle;
+					ctx.stroke(); 
 					ctx.fill();
 					break;
 				}
@@ -1436,6 +1446,8 @@
 				}
 
 				drawRoundedRectangle(ctx,tooltipX,tooltipY,tooltipWidth,tooltipRectHeight,this.cornerRadius);
+				ctx.strokeStyle = this.strokeStyle;
+				ctx.stroke(); 
 
 				ctx.fill();
 

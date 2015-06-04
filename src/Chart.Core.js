@@ -1537,6 +1537,8 @@
 				drawRoundedRectangle(this.ctx,this.x,this.y - this.height/2,this.width,this.height,this.cornerRadius);
 				var ctx = this.ctx;
 				ctx.fillStyle = this.fillColor;
+				ctx.strokeColor = this.strokeColor;
+				ctx.stroke();
 				ctx.fill();
 				ctx.closePath();
 

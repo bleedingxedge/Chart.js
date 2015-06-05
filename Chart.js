@@ -1439,8 +1439,8 @@
 					ctx.lineTo(this.x - this.caretHeight, this.y - (caretPadding + this.caretHeight));
 					ctx.closePath();
 					ctx.strokeStyle = this.strokeStyle;
-					ctx.stroke(); 
 					ctx.fill();
+					ctx.stroke(); 
 					break;
 				case "below":
 					tooltipY = this.y + caretPadding + this.caretHeight;
@@ -1451,8 +1451,8 @@
 					ctx.lineTo(this.x - this.caretHeight, this.y + caretPadding + this.caretHeight);
 					ctx.closePath();
 					ctx.strokeStyle = this.strokeStyle;
-					ctx.stroke(); 
 					ctx.fill();
+					ctx.stroke(); 
 					break;
 				}
 
@@ -1537,7 +1537,7 @@
 				drawRoundedRectangle(this.ctx,this.x,this.y - this.height/2,this.width,this.height,this.cornerRadius);
 				var ctx = this.ctx;
 				ctx.fillStyle = this.fillColor;
-				ctx.strokeColor = this.strokeColor;
+				ctx.strokeStyle = this.strokeStyle;
 				ctx.stroke();
 				ctx.fill();
 				ctx.closePath();

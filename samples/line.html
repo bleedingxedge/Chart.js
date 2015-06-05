@@ -45,7 +45,8 @@
 		var ctx = document.getElementById("canvas").getContext("2d");
 		window.myLine = new Chart(ctx).Line(lineChartData, {
 			responsive: true,
-			showXLabels: 2
+			showXLabels: 2,
+			tooltipStrokeColor: '#00ff00'
 		});
 	}
 

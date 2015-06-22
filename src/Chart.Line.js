@@ -70,9 +70,10 @@
 				display: this.options.pointDot,
 				hitDetectionRadius : this.options.pointHitDetectionRadius,
 				ctx : this.chart.ctx,
-				inRange : function(mouseX){
-					return (Math.pow(mouseX-this.x, 2) < Math.pow(this.radius + this.hitDetectionRadius,2));
-				}
+				// Commented because this seems to be the only way to fix #1465 according to https://github.com/nnnick/Chart.js/issues/757
+				//inRange : function(mouseX){
+				//	return (Math.pow(mouseX-this.x, 2) < Math.pow(this.radius + this.hitDetectionRadius,2));
+				//}
 			});
 			console.debug('datadebug', data);
 			this.datasets = [];
